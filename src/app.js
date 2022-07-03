@@ -5,19 +5,27 @@ console.log('app.js is running!');
 // 1. create app object title/subtitle
 // A. use title/subtitle in the template
 // B. render template
+// **               Challenge  3               ** //
+// 1. Only render the subtitle (and p tag) if
+//    subtitle exist - logical and operator
+// 2. Render new p tag - if options.length > 0
+//    'here are your options'. if < 0 'no options'
+//    * hint. ternary
 // ** ======================================== ** //
 
 // JSX - JavaScript XML
 // need wrapper div
 const app = {
   title: 'Indecision App',
-  subtitle: 'A practice app for reviewing React'
+  subtitle: 'A practice app for reviewing React',
+  options: ['One', 'Two']
 }
 
 const template = (
   <div>
     <h1>{app.title}</h1>
-    <p>{app.subtitle}</p>
+    {app.subtitle && <p>{app.subtitle}</p>}
+    <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
   </div>
 );
 
@@ -37,11 +45,17 @@ const user = {
   location: 'Renton'
 };
 
+function getLocation(location) {
+  if (location) {
+    return <p>Location: {location}</p>;
+  } else return undefined;
+}
+
 const templateTwo = (
   <div>
-    <h1>{user.name}</h1>
-    <p>Age: {user.age}</p>
-    <p>Location: {user.location}</p> 
+    <h1>{user.name ? user.name : 'Anonymous'}</h1>
+    {(user.age >= 18) && <p>Age: {user.age}</p>}
+    {getLocation(user.location)}
   </div>
 );
 

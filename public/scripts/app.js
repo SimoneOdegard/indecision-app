@@ -7,13 +7,20 @@ console.log('app.js is running!');
 // 1. create app object title/subtitle
 // A. use title/subtitle in the template
 // B. render template
+// **               Challenge  3               ** //
+// 1. Only render the subtitle (and p tag) if
+//    subtitle exist - logical and operator
+// 2. Render new p tag - if options.length > 0
+//    'here are your options'. if < 0 'no options'
+//    * hint. ternary
 // ** ======================================== ** //
 
 // JSX - JavaScript XML
 // need wrapper div
 var app = {
   title: 'Indecision App',
-  subtitle: 'A practice app for reviewing React'
+  subtitle: 'A practice app for reviewing React',
+  options: ['One', 'Two']
 };
 
 var template = React.createElement(
@@ -24,10 +31,15 @@ var template = React.createElement(
     null,
     app.title
   ),
-  React.createElement(
+  app.subtitle && React.createElement(
     'p',
     null,
     app.subtitle
+  ),
+  React.createElement(
+    'p',
+    null,
+    app.options.length > 0 ? 'Here are your options' : 'No options'
   )
 );
 
@@ -47,26 +59,32 @@ var user = {
   location: 'Renton'
 };
 
+function getLocation(location) {
+  if (location) {
+    return React.createElement(
+      'p',
+      null,
+      'Location: ',
+      location
+    );
+  } else return undefined;
+}
+
 var templateTwo = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    user.name
+    user.name ? user.name : 'Anonymous'
   ),
-  React.createElement(
+  user.age >= 18 && React.createElement(
     'p',
     null,
     'Age: ',
     user.age
   ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
+  getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
