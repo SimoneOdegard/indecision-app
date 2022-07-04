@@ -1,8 +1,6 @@
-'use strict';
-
 // arguments object - no longer bound with arrow functions
 
-var add = function add(a, b) {
+const add = (a, b) => {
   // console.log(arguments);
   //  ---> no longer works. if you need arguments use es5 function
   return a + b;
@@ -12,15 +10,11 @@ console.log(add(55, 1));
 
 // this keyword - no longer bound
 
-var user = {
+const user = {
   name: 'Simone',
   cities: ['Redmond', 'Maple Valley', 'Issaquah'],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    return this.cities.map(function (city) {
-      return _this.name + ' has lived in ' + city;
-    });
+  printPlacesLived() {
+    return this.cities.map((city) => this.name + ' has lived in ' + city);
   }
 };
 
@@ -39,15 +33,11 @@ console.log(user.printPlacesLived());
 //      numbers have been multiplied
 // ** ======================================== ** //
 
-var multiplier = {
+const multiplier = {
   numbers: [1, 2, 3],
   multiplyBy: 2,
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.numbers.map(function (num) {
-      return num * _this2.multiplyBy;
-    });
+  multiply() {
+    return this.numbers.map((num) => num * this.multiplyBy);
   }
 };
 
