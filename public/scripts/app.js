@@ -1,54 +1,125 @@
 'use strict';
 
-// arguments object - no longer bound with arrow functions
-
-var add = function add(a, b) {
-  // console.log(arguments);
-  //  ---> no longer works. if you need arguments use es5 function
-  return a + b;
-};
-
-console.log(add(55, 1));
-
-// this keyword - no longer bound
-
-var user = {
-  name: 'Simone',
-  cities: ['Redmond', 'Maple Valley', 'Issaquah'],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    return this.cities.map(function (city) {
-      return _this.name + ' has lived in ' + city;
-    });
-  }
-};
-
-// map vs forEach
-// map = transform each item getting a new array back
-// forEach = do something with each item like print to the screen
-
-console.log(user.printPlacesLived());
+console.log('app.js is running!');
 
 // ** ======================================== ** //
-// **               Challenge  5               ** //
-// 1. similar to up above...
-//    - array of numbers we want to multiply
-//    - multiplyBy - single number
-//    - multiply - return new array where the
-//      numbers have been multiplied
+// **               Challenge  2               ** //
+// 1. create app object title/subtitle
+// A. use title/subtitle in the template
+// B. render template
+// **               Challenge  3               ** //
+// 1. Only render the subtitle (and p tag) if
+//    subtitle exist - logical and operator
+// 2. Render new p tag - if options.length > 0
+//    'here are your options'. if < 0 'no options'
+//    * hint. ternary
 // ** ======================================== ** //
 
-var multiplier = {
-  numbers: [1, 2, 3],
-  multiplyBy: 2,
-  multiply: function multiply() {
-    var _this2 = this;
-
-    return this.numbers.map(function (num) {
-      return num * _this2.multiplyBy;
-    });
-  }
+// JSX - JavaScript XML
+// need wrapper div
+var app = {
+  title: 'Indecision App',
+  subtitle: 'A practice app for reviewing React',
+  options: ['One', 'Two']
 };
 
-console.log(multiplier.multiply());
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    'p',
+    null,
+    app.options.length > 0 ? 'Here are your options' : 'No options'
+  )
+);
+
+// ** ======================================== ** //
+// **               Challenge  1               ** //
+// 1. create a templateTwo var JSX expression
+// A. root div
+//      h1 -> your name
+//      p -> Age: 32
+//      p -> Location: Renton, WA
+// B. render templateTwo instead of template
+// ** ======================================== ** //
+
+// const user = {
+//   name: 'Monie',
+//   age: 32,
+//   location: 'Renton'
+// };
+
+// function getLocation(location) {
+//   if (location) {
+//     return <p>Location: {location}</p>;
+//   } else return undefined;
+// }
+
+// const templateTwo = (
+//   <div>
+//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
+//     {(user.age >= 18) && <p>Age: {user.age}</p>}
+//     {getLocation(user.location)}
+//   </div>
+// );
+
+// ** ======================================== ** //
+// **               Challenge  6               ** //
+// 1. create 2 new buttons
+//    -- Make button "-1". Set up minusOne
+//       function and register - log minusOne
+//    -- Make reset button "reset". setup reset
+//       function - log reset
+// ** ======================================== ** //
+
+var count = 0;
+var addOne = function addOne() {
+  console.log('addOne');
+};
+var minusOne = function minusOne() {
+  console.log('minusOne');
+};
+var reset = function reset() {
+  console.log('reset');
+};
+
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Count: ',
+    count
+  ),
+  React.createElement(
+    'button',
+    { onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: minusOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: reset },
+    'reset'
+  )
+);
+
+console.log(templateTwo);
+var appRoot = document.getElementById('app');
+
+ReactDOM.render(templateTwo, appRoot);
