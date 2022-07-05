@@ -20,117 +20,80 @@ console.log('app.js is running!');
 var app = {
   title: 'Indecision App',
   subtitle: 'A practice app for reviewing React',
-  options: ['One', 'Two']
+  options: []
 };
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    app.title
-  ),
-  app.subtitle && React.createElement(
-    'p',
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    'p',
-    null,
-    app.options.length > 0 ? 'Here are your options' : 'No options'
-  )
-);
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault(); // prevents full page refresh
 
-// ** ======================================== ** //
-// **               Challenge  1               ** //
-// 1. create a templateTwo var JSX expression
-// A. root div
-//      h1 -> your name
-//      p -> Age: 32
-//      p -> Location: Renton, WA
-// B. render templateTwo instead of template
-// ** ======================================== ** //
+  var option = e.target.elements.option.value;
 
-// const user = {
-//   name: 'Monie',
-//   age: 32,
-//   location: 'Renton'
-// };
-
-// function getLocation(location) {
-//   if (location) {
-//     return <p>Location: {location}</p>;
-//   } else return undefined;
-// }
-
-// const templateTwo = (
-//   <div>
-//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
-//     {(user.age >= 18) && <p>Age: {user.age}</p>}
-//     {getLocation(user.location)}
-//   </div>
-// );
-
-// ** ======================================== ** //
-// **               Challenge  6               ** //
-// 1. create 2 new buttons
-//    -- Make button "-1". Set up minusOne
-//       function and register - log minusOne
-//    -- Make reset button "reset". setup reset
-//       function - log reset
-// ** ======================================== ** //
-// **               Challenge  7               ** //
-// 1. make minusOne and reset work
-//    -- minusOne subtracts by 1
-//    -- reset resets the count
-// ** ======================================== ** //
-
-var count = 0;
-var addOne = function addOne() {
-  count++;
-  renderCounterApp();
-};
-var minusOne = function minusOne() {
-  count--;
-  renderCounterApp();
-};
-var reset = function reset() {
-  count = 0;
-  renderCounterApp();
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderTemplate();
+  }
 };
 
-var appRoot = document.getElementById('app');
+var removeAll = function removeAll(e) {
+  e.preventDefault();
+  app.options = [];
+  renderTemplate();
+};
 
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
+var renderTemplate = function renderTemplate() {
+  var template = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count: ',
-      count
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      'p',
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length > 0 ? 'Here are your options' : 'No options'
+    ),
+    React.createElement(
+      'p',
+      null,
+      app.options.length
     ),
     React.createElement(
       'button',
-      { onClick: addOne },
-      '+1'
+      { onClick: removeAll },
+      'Remove all'
     ),
     React.createElement(
-      'button',
-      { onClick: minusOne },
-      '-1'
+      'ol',
+      null,
+      app.options.map(function (option) {
+        return React.createElement(
+          'li',
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
-      'button',
-      { onClick: reset },
-      'reset'
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
+      )
     )
   );
-
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+var appRoot = document.getElementById('app');
+renderTemplate();

@@ -18,88 +18,50 @@ console.log('app.js is running!');
 const app = {
   title: 'Indecision App',
   subtitle: 'A practice app for reviewing React',
-  options: ['One', 'Two']
+  options: []
 }
 
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-  </div>
-);
+const onFormSubmit = (e) => {
+  e.preventDefault(); // prevents full page refresh
 
-// ** ======================================== ** //
-// **               Challenge  1               ** //
-// 1. create a templateTwo var JSX expression
-// A. root div
-//      h1 -> your name
-//      p -> Age: 32
-//      p -> Location: Renton, WA
-// B. render templateTwo instead of template
-// ** ======================================== ** //
+  const option = e.target.elements.option.value;
 
-// const user = {
-//   name: 'Monie',
-//   age: 32,
-//   location: 'Renton'
-// };
-
-// function getLocation(location) {
-//   if (location) {
-//     return <p>Location: {location}</p>;
-//   } else return undefined;
-// }
-
-// const templateTwo = (
-//   <div>
-//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
-//     {(user.age >= 18) && <p>Age: {user.age}</p>}
-//     {getLocation(user.location)}
-//   </div>
-// );
-
-// ** ======================================== ** //
-// **               Challenge  6               ** //
-// 1. create 2 new buttons
-//    -- Make button "-1". Set up minusOne
-//       function and register - log minusOne
-//    -- Make reset button "reset". setup reset
-//       function - log reset
-// ** ======================================== ** //
-// **               Challenge  7               ** //
-// 1. make minusOne and reset work
-//    -- minusOne subtracts by 1
-//    -- reset resets the count
-// ** ======================================== ** //
-
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderTemplate();
+  }
 };
-const minusOne = () => {
-  count--;
-  renderCounterApp();
-};
-const reset = () => {
-  count = 0;
-  renderCounterApp();
+
+const removeAll = (e) => {
+  e.preventDefault();
+  app.options = [];
+  renderTemplate();
+}
+
+const renderTemplate = () => {
+  const template = (
+    <div>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p>{app.subtitle}</p>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+      <p>{app.options.length}</p>
+      <button onClick={removeAll}>Remove all</button>
+      <ol>
+        {
+          app.options.map((option) => {
+            return <li key={option}>{option}</li>
+          })
+        }
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+      </form>
+    </div>
+  );
+  ReactDOM.render(template, appRoot);
 };
 
 const appRoot = document.getElementById('app');
-
-const renderCounterApp = () => {
-  const templateTwo = (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>reset</button>
-    </div>
-  );
-
-  ReactDOM.render(templateTwo, appRoot);
-};
-
-renderCounterApp();
+renderTemplate();
