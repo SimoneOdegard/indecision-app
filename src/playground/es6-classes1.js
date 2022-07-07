@@ -21,7 +21,6 @@ class Person {
     this.age = age;
   }
   getGreeting() {
-    // return 'Hello, I am ' + this.name + '!';
     return `Hello, I am ${this.name}!`;
   }
   getDescription() {
