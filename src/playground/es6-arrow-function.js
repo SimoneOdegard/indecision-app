@@ -15,7 +15,7 @@ const squareArrow = (x) => x * x;
 console.log(squareArrow(4));
 
 // ** ======================================== ** //
-// **               Challenge  4               ** //
+// **                 Challenge                ** //
 // 1. use arrow function called get first name
 //    - getFirstName('mike smith') -> 'mike'
 //    - create regular arrow function

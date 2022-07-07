@@ -1,13 +1,13 @@
 
 // ** ======================================== ** //
-// **               Challenge  6               ** //
+// **                 Challenge                ** //
 // 1. create 2 new buttons
 //    -- Make button "-1". Set up minusOne
 //       function and register - log minusOne
 //    -- Make reset button "reset". setup reset
 //       function - log reset
 // ** ======================================== ** //
-// **               Challenge  7               ** //
+// **                 Challenge                ** //
 // 1. make minusOne and reset work
 //    -- minusOne subtracts by 1
 //    -- reset resets the count

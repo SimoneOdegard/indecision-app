@@ -1,5 +1,5 @@
 // ** ======================================== ** //
-// **               Challenge  1               ** //
+// **                 Challenge                ** //
 // 1. create a templateTwo var JSX expression
 // A. root div
 //      h1 -> your name

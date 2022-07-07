@@ -25,7 +25,7 @@ const user = {
 console.log(user.printPlacesLived());
 
 // ** ======================================== ** //
-// **               Challenge  5               ** //
+// **                 Challenge                ** //
 // 1. similar to up above...
 //    - array of numbers we want to multiply
 //    - multiplyBy - single number
