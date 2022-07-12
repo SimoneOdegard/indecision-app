@@ -41,8 +41,14 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
+
   handleRemoveAll() {
-    alert('handleRemoveAll');
+    console.log(this.props.options);
+    // alert('handleRemoveAll');
   }
 
   render() {
@@ -68,8 +74,6 @@ class Option extends React.Component {
     );
   }
 }
-
-// 3. handleAddOption - fetch the value typed, if value, then alert
 
 class AddOption extends React.Component {
   handleAddOption(e) {
