@@ -26,20 +26,11 @@ var VisibilityToggle = function (_React$Component) {
   _createClass(VisibilityToggle, [{
     key: 'handleToggleVisibility',
     value: function handleToggleVisibility() {
-      if (this.state.visibility === false) {
-        this.setState(function () {
-          return {
-            visibility: true
-          };
-        });
-      };
-      if (this.state.visibility === true) {
-        this.setState(function () {
-          return {
-            visibility: false
-          };
-        });
-      };
+      this.setState(function (prevState) {
+        return {
+          visibility: !prevState.visibility
+        };
+      });
     }
   }, {
     key: 'render',
