@@ -21,7 +21,6 @@ class IndecisionApp extends React.Component {
     const option = this.state.options[randomNum];
     alert(option);
   }
-  // randomly pick an option and alert it
 
   render() {
     const title = 'Indecision';

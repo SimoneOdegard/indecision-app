@@ -40,8 +40,6 @@ var IndecisionApp = function (_React$Component) {
       var option = this.state.options[randomNum];
       alert(option);
     }
-    // randomly pick an option and alert it
-
   }, {
     key: 'render',
     value: function render() {
