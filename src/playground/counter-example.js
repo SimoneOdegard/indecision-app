@@ -49,7 +49,7 @@ Counter.defaultProps = {
   count: 0
 }
 
-ReactDOM.render(<Counter/>, document.getElementById('app'));
+ReactDOM.render(<Counter />, document.getElementById('app'));
 
 
 
