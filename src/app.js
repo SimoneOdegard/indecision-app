@@ -6,7 +6,7 @@ class IndecisionApp extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: props.options
+      options: []
     };
   }
 
@@ -17,7 +17,7 @@ class IndecisionApp extends React.Component {
 
       if (options) {
         this.setState(() => ({ options }));
-      };
+      }
     } catch (e) {
       // do nothing at all
     }
@@ -87,10 +87,6 @@ class IndecisionApp extends React.Component {
     );
   }
 }
-
-IndecisionApp.defaultProps = {
-  options: []
-};
 
 // ============== STATELESS FUNCTIONAL COMPONENTS  ============== //
 const Header = (props) => {
