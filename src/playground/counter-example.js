@@ -10,24 +10,20 @@ class Counter extends React.Component {
   }
 
   componentDidMount() {
-    try {
-      const json = localStorage.getItem('count');
-      const count = JSON.parse(json);
+    // did not need a try catch
+    const stringCount = localStorage.getItem('count');
+    const count = parseInt(stringCount, 10);
 
-      if (count) {
-        this.setState(() => ({ count }));
-      }
-    } catch(e) {
-      // do nothing at all
+    if (!isNaN(count)) {
+      this.setState(() => ({ count }));
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.count !== this.state.count) {
-      const json = JSON.stringify(this.state.count);
-      localStorage.setItem('count', json);
+      // const json = JSON.stringify(this.state.count); ---> don't need this
+      localStorage.setItem('count', this.state.count);
     }
-    console.log('updated!!');
   }
 
   handleAddOne() {
